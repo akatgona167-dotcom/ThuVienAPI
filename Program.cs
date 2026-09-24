@@ -1,26 +1,30 @@
 using Microsoft.EntityFrameworkCore;
 using WebAPI.Data;
+using WebAPI.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// 1. Thêm dịch vụ OpenAPI & Swagger
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(); 
+builder.Services.AddSwaggerGen();
+
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlServer(connectionString));
+
+
+builder.Services.AddScoped<IBookRepository, SQLBookRepository>();
 
 var app = builder.Build();
 
-// 2. Bật middleware hiển thị Swagger UI
-
-app.UseSwagger();
-app.UseSwaggerUI(c =>
+if (app.Environment.IsDevelopment())
 {
-    c.SwaggerEndpoint("/swagger/v1/swagger.json", "My Web API v1");
-    c.RoutePrefix = "swagger"; 
-});
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
-
 app.Run();

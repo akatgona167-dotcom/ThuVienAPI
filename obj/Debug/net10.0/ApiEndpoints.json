@@ -71,7 +71,7 @@
         "IsRequired": true
       },
       {
-        "Name": "addBookRequestDTO",
+        "Name": "bookDTO",
         "Type": "WebAPI.Models.DTO.AddBookRequestDTO",
         "IsRequired": true
       }
