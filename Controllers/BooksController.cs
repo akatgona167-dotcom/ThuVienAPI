@@ -17,9 +17,10 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("get-all-books")]
-        public IActionResult GetAll()
+        public IActionResult GetAll([FromQuery] string? filterOn, [FromQuery] string? filterQuery)
         {
-            var allBooks = _bookRepository.GetAllBooks();
+            // su dung repository pattern
+            var allBooks = _bookRepository.GetAllBooks(filterOn, filterQuery);
             return Ok(allBooks);
         }
 
