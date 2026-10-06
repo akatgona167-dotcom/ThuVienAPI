@@ -9,6 +9,6 @@ namespace WebAPI.Repositories
         AuthorNoIdDTO GetAuthorById(int id);
         AddAuthorRequestDTO AddAuthor(AddAuthorRequestDTO addAuthorRequestDTO);
         AuthorNoIdDTO UpdateAuthorById(int id, AuthorNoIdDTO authorNoIdDTO);
-        Author? DeleteAuthorById(int id);
+        Author? DeleteAuthorById(int id);   
     }
 }

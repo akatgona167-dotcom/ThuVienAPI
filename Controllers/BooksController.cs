@@ -2,6 +2,7 @@
 using WebAPI.CustomActionFilter;
 using WebAPI.Models.DTO;
 using WebAPI.Repositories;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebAPI.Controllers
 {
@@ -17,15 +18,17 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("get-all-books")]
+        [Authorize(Roles = "Read")]
         public IActionResult GetAll([FromQuery] string? filterOn, [FromQuery] string? filterQuery)
         {
-            // su dung repository pattern
+          
             var allBooks = _bookRepository.GetAllBooks(filterOn, filterQuery);
             return Ok(allBooks);
         }
 
         [HttpGet]
         [Route("get-book-by-id/{id}")]
+        [Authorize(Roles = "Read")]
         public IActionResult GetBookById([FromRoute] int id)
         {
             var bookWithIdDTO = _bookRepository.GetBookById(id);
@@ -33,6 +36,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("add-book")]
+        [Authorize(Roles = "Write")]
         [ValidateModel]
         public IActionResult AddBook([FromBody] AddBookRequestDTO addBookRequestDTO)
         {
@@ -46,6 +50,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPut("update-book-by-id/{id}")]
+        [Authorize(Roles = "Write")]
         public IActionResult UpdateBookById(int id, [FromBody] AddBookRequestDTO bookDTO)
         {
             var updateBook = _bookRepository.UpdateBookById(id, bookDTO);
@@ -53,6 +58,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpDelete("delete-book-by-id/{id}")]
+        [Authorize(Roles = "Write")]
         public IActionResult DeleteBookById(int id)
         {
             var deleteBook = _bookRepository.DeleteBookById(id);

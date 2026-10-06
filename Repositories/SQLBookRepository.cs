@@ -30,7 +30,7 @@ namespace WebAPI.Repositories
                 AuthorNames = Books.Book_Authors.Select(n => n.Author.FullName).ToList()
             }).AsQueryable();
 
-            //filtering
+           
             if (string.IsNullOrWhiteSpace(filterOn) == false && string.IsNullOrWhiteSpace(filterQuery) == false)
             {
                 if (filterOn.Equals("title", StringComparison.OrdinalIgnoreCase))
