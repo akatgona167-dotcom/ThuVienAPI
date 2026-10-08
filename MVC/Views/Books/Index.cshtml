@@ -1,0 +1,42 @@
+﻿@model List<BookStoreMVC.Models.BookDTO>
+
+@{
+    ViewData["Title"] = "Danh sách sách";
+}
+
+<h2>Danh sách Books</h2>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Genre</th>
+            <th>Rate</th>
+            <th>Publisher</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            @foreach (var book in Model)
+            {
+                <tr>
+                    <td>@book.Id</td>
+                    <td>@book.Title</td>
+                    <td>@book.Description</td>
+                    <td>@book.Genre</td>
+                    <td>@book.Rate</td>
+                    <td>@book.PublisherName</td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="6" class="text-center">Không có dữ liệu</td>
+            </tr>
+        }
+    </tbody>
+</table>
