@@ -142,3 +142,12 @@ E:\API\WebAPI\WebAPI\obj\Debug\net10.0\WebAPI.pdb
 E:\API\WebAPI\WebAPI\obj\Debug\net10.0\WebAPI.genruntimeconfig.cache
 E:\API\WebAPI\WebAPI\obj\Debug\net10.0\ref\WebAPI.dll
 E:\API\WebAPI\WebAPI\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt
+E:\API\WebAPI\WebAPI\bin\Debug\net10.0\Serilog.dll
+E:\API\WebAPI\WebAPI\bin\Debug\net10.0\Serilog.AspNetCore.dll
+E:\API\WebAPI\WebAPI\bin\Debug\net10.0\Serilog.Extensions.Hosting.dll
+E:\API\WebAPI\WebAPI\bin\Debug\net10.0\Serilog.Extensions.Logging.dll
+E:\API\WebAPI\WebAPI\bin\Debug\net10.0\Serilog.Formatting.Compact.dll
+E:\API\WebAPI\WebAPI\bin\Debug\net10.0\Serilog.Settings.Configuration.dll
+E:\API\WebAPI\WebAPI\bin\Debug\net10.0\Serilog.Sinks.Console.dll
+E:\API\WebAPI\WebAPI\bin\Debug\net10.0\Serilog.Sinks.Debug.dll
+E:\API\WebAPI\WebAPI\bin\Debug\net10.0\Serilog.Sinks.File.dll

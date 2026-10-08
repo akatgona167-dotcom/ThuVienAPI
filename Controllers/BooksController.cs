@@ -3,6 +3,7 @@ using WebAPI.CustomActionFilter;
 using WebAPI.Models.DTO;
 using WebAPI.Repositories;
 using Microsoft.AspNetCore.Authorization;
+using System.Text.Json;   
 
 namespace WebAPI.Controllers
 {
@@ -11,18 +12,26 @@ namespace WebAPI.Controllers
     public class BooksController : ControllerBase
     {
         private readonly IBookRepository _bookRepository;
+        private readonly ILogger<BooksController> _logger;   
 
-        public BooksController(IBookRepository bookRepository)
+        public BooksController(IBookRepository bookRepository, ILogger<BooksController> logger)
         {
             _bookRepository = bookRepository;
+            _logger = logger;                                
         }
 
         [HttpGet("get-all-books")]
         [Authorize(Roles = "Read")]
         public IActionResult GetAll([FromQuery] string? filterOn, [FromQuery] string? filterQuery)
         {
-          
+            _logger.LogInformation("GetAll Book Action method was invoked");
+            _logger.LogWarning("This is a warning log");
+            _logger.LogError("This is a error log");
+
             var allBooks = _bookRepository.GetAllBooks(filterOn, filterQuery);
+
+            _logger.LogInformation($"Finished GetAllBook request with data {JsonSerializer.Serialize(allBooks)}");
+
             return Ok(allBooks);
         }
 
@@ -64,6 +73,7 @@ namespace WebAPI.Controllers
             var deleteBook = _bookRepository.DeleteBookById(id);
             return Ok(deleteBook);
         }
+
         #region Private methods
 
         private bool ValidateAddBook(AddBookRequestDTO addBookRequestDTO)
@@ -81,7 +91,6 @@ namespace WebAPI.Controllers
                     $"{nameof(addBookRequestDTO.Description)} cannot be null");
             }
 
-    
             if (addBookRequestDTO.Rate < 0 || addBookRequestDTO.Rate > 5)
             {
                 ModelState.AddModelError(
@@ -99,5 +108,4 @@ namespace WebAPI.Controllers
 
         #endregion
     }
-
 }

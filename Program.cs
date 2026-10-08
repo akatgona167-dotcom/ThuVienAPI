@@ -3,11 +3,23 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Serilog;
 using System.Text;
 using WebAPI.Data;
 using WebAPI.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
+
+
+var _logger = new LoggerConfiguration()
+    .WriteTo.Console()
+    .WriteTo.File("Logs/Book_Log.txt", rollingInterval: RollingInterval.Minute)
+    .MinimumLevel.Information()
+    .CreateLogger();
+
+builder.Logging.ClearProviders();
+builder.Logging.AddSerilog(_logger);
+
 
 builder.Services.AddSwaggerGen(options =>
 {
@@ -94,7 +106,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseAuthentication();  
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
